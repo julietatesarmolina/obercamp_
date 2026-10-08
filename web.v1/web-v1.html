@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OBERCAMP | Centro de Entrenamiento de Fútbol</title>
+  
+  <!-- Tipografía Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #0b0b0e;
+      --bg-card: #141419;
+      --bg-card-hover: #1c1c24;
+      
+      --accent-pink: #FE549D;
+      --accent-pink-hover: #e03b83;
+      --accent-pink-light: #ff7db7;
+      --accent-pink-glow: rgba(254, 84, 157, 0.4);
+      
+      --silver-gray: #C5C6C9;
+      --text-light: #ffffff;
+      --text-muted: #a0a0b0;
+      --border-color: #262630;
+      --font-title: 'Montserrat', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-title);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* === NAVBAR === */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(11, 11, 14, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(254, 84, 157, 0.25);
+      z-index: 1000;
+      padding: 0.8rem 5%;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo img {
+      height: 42px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--silver-gray);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 0.5rem 0;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--accent-pink);
+    }
+
+    /* === HERO SECTION === */
+    .hero {
+      min-height: 85vh;
+      padding: 8rem 2rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(11,11,14,0.5) 0%, rgba(11,11,14,1) 100%),
+                  radial-gradient(circle at center, rgba(254, 84, 157, 0.15) 0%, transparent 70%);
+    }
+
+    .hero-logo-img {
+      max-width: 280px;
+      width: 100%;
+      height: auto;
+      margin-bottom: 2rem;
+      filter: drop-shadow(0 0 25px rgba(254, 84, 157, 0.3));
+    }
+
+    .hero-subtitle {
+      color: var(--accent-pink);
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+      font-size: 0.95rem;
+    }
+
+    .hero-description {
+      max-width: 650px;
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      font-style: italic;
+    }
+
+    .btn-primary {
+      background: linear-gradient(45deg, var(--accent-pink), var(--accent-pink-light));
+      color: #fff;
+      padding: 1.1rem 2.8rem;
+      border: none;
+      border-radius: 50px;
+      font-weight: 900;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 0 25px rgba(254, 84, 157, 0.45);
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 35px rgba(254, 84, 157, 0.75);
+    }
+
+    /* === SECCIONES === */
+    section {
+      padding: 5rem 8%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 900;
+      font-style: italic;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      color: var(--silver-gray);
+    }
+
+    .section-title span {
+      color: var(--accent-pink);
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 3.5rem;
+      font-size: 0.95rem;
+      font-style: italic;
+    }
+
+    .card-text {
+      color: var(--silver-gray);
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+
+    /* === GRID INFO === */
+    .grid-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      position: relative;
+    }
+
+    .info-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--silver-gray), var(--accent-pink));
+      border-radius: 20px 20px 0 0;
+    }
+
+    .info-card h3 {
+      font-size: 1.6rem;
+      font-weight: 900;
+      font-style: italic;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      color: var(--accent-pink);
+    }
+
+    /* === PLANES === */
+    .grid-plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .plan-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 3rem 2.2rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .plan-card.highlight {
+      border: 2px solid var(--accent-pink);
+      box-shadow: 0 0 30px rgba(254, 84, 157, 0.25);
+    }
+
+    .plan-title {
+      font-size: 1.8rem;
+      font-weight: 900;
+      font-style: italic;
+      text-transform: uppercase;
+      color: var(--silver-gray);
+      margin-bottom: 1rem;
+    }
+
+    .btn-plan-details {
+      background: transparent;
+      border: 2px solid var(--accent-pink);
+      color: var(--text-light);
+      padding: 0.9rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 2rem;
+      transition: all 0.3s;
+    }
+
+    .btn-plan-details:hover {
+      background: var(--accent-pink);
+      color: #fff;
+    }
+
+    /* === MODAL === */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      padding: 1.5rem;
+    }
+
+    .modal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--accent-pink);
+      border-radius: 24px;
+      max-width: 480px;
+      width: 100%;
+      padding: 2.5rem;
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 22px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
+
+    .modal-title {
+      font-size: 1.6rem;
+      font-weight: 900;
+      font-style: italic;
+      color: var(--accent-pink);
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+
+    .modal-info-item {
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.8rem;
+    }
+
+    .modal-info-label {
+      font-weight: 800;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      color: var(--silver-gray);
+    }
+
+    .modal-info-value {
+      color: var(--text-light);
+      font-size: 0.95rem;
+    }
+
+    /* === REGISTRO DE JUGADOR === */
+    .form-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 3.5rem 2.5rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 800;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      color: var(--silver-gray);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      background: #08080a;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      color: #fff;
+      font-size: 0.95rem;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent-pink);
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(45deg, var(--accent-pink), var(--accent-pink-light));
+      color: #fff;
+      padding: 1.1rem 2rem;
+      border: none;
+      border-radius: 50px;
+      font-weight: 900;
+      font-size: 1rem;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 0 25px rgba(254, 84, 157, 0.4);
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* === FOOTER === */
+    .main-footer {
+      background-color: #08090b;
+      border-top: 1px solid #252934;
+      padding: 4rem 2rem 1.5rem 2rem;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .footer-col h4 {
+      color: #fe549d;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      font-weight: 800;
+    }
+
+    .footer-logo {
+      height: 45px;
+      margin-bottom: 1rem;
+    }
+
+    .footer-desc {
+      color: #c5c6c9;
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-col ul li a {
+      color: #c5c6c9;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .footer-col p {
+      color: #c5c6c9;
+      font-size: 0.9rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      border-top: 1px solid #252934;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      color: #7e8492;
+      font-size: 0.85rem;
+    }
+
+    .footer-map {
+    margin-top: 1rem;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  }
+
+  .footer-map iframe {
+    display: block;
+    width: 100%;
+  }
+
+  .footer-col a {
+  transition: color 0.3s ease;
+  }
+
+  .footer-col a:hover {
+    color: var(--accent-pink) !important;
+  }
+
+  .footer-link-instagram {
+    color: var(--silver-gray);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .form-wrapper { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <div class="nav-container">
+      <a href="#inicio" class="brand-logo">
+        <img src="logo.jpg" alt="OBERCAMP Logo">
+      </a>
+      <ul class="nav-links">
+        <li><a href="#inicio" class="active">Inicio</a></li>
+        <li><a href="#nosotros">Conocé Obercamp</a></li>
+        <li><a href="#planes">Nuestros Planes</a></li>
+        <li><a href="#registro">Registro de Jugador</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section id="inicio" class="hero">
+    <img src="logo.jpg" alt="OBERCAMP Logo" class="hero-logo-img">
+    <div class="hero-subtitle">| Potencia | Pliometria | Rendimiento |</div>
+    <p class="hero-description">Dónde el talento se transforma en juego</p>
+    <a href="#registro" class="btn-primary">Registrar Jugador</a>
+  </section>
+
+  <!-- SECCIÓN: CONOCÉ OBERCAMP -->
+  <section id="nosotros">
+    <h2 class="section-title">CONOCÉ <span>OBERCAMP</span></h2>
+
+    <div class="grid-info">
+      <div class="info-card">
+        <h3>QUIÉNES SOMOS</h3>
+        <p class="card-text"><strong>OBERCAMP</strong> es un espacio de entrenamiento futbolístico creado para potenciar las capacidades de cada jugador. Buscamos que cada futbolista pueda desarrollar su máximo potencial, trabajando de manera específica sobre las necesidades que el juego exige.</p>
+      </div>
+
+      <div class="info-card">
+        <h3>QUÉ HACEMOS</h3>
+        <p class="card-text">Trabajamos para mejorar aspectos fundamentales del futbolista: <strong>precisión, potencia, pliometría, coordinación, velocidad y capacidad de movimiento, </strong> siempre buscando que cada ejercicio tenga una aplicación real dentro de la cancha.</p>
+      </div>
+
+      <div class="info-card">
+        <h3>DE QUÉ TRATA</h3>
+        <p class="card-text">Entrenamos con una metodología dinámica, progresiva y específica para el fútbol. Cada sesión combina intensidad, técnica y toma de decisiones.<br><br>No entrenamos solamente para estar en forma. Entrenamos para jugar mejor.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN: NUESTROS PLANES -->
+  <section id="planes">
+    <h2 class="section-title">NUESTROS <span>PLANES</span></h2>
+
+    <div class="grid-plans">
+      <div class="plan-card">
+        <div>
+          <h3 class="plan-title">Plan Inferiores</h3>
+          <p class="card-text">Para jugadores que actualmente estén en un club y quieran mejorar sus habilidades dentro de la cancha con estadísticas de mediciones y mejoras.</p>
+        </div>
+        <button class="btn-plan-details" onclick="openModal('inferiores')">Ver Detalles y Días</button>
+      </div>
+
+      <div class="plan-card highlight">
+        <div>
+          <h3 class="plan-title">Plan Libre</h3>
+          <p class="card-text">Para jugadores libres que quieran entrenar en un espacio de mejora física y técnica para mantener el ritmo competitivo.</p>
+        </div>
+        <button class="btn-plan-details" onclick="openModal('libre')">Ver Detalles y Días</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL INFORMATIVO DINÁMICO -->
+  <div class="modal-overlay" id="planModal">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <h3 class="modal-title" id="modalPlanTitle">Detalles del Plan</h3>
+
+      <!--<div class="modal-info-item">
+        <div class="modal-info-label">⚽ Edades Recomendadas</div>
+        <div class="modal-info-value" id="modalEdades">-</div>
+      </div>-->
+
+      <div class="modal-info-item">
+        <div class="modal-info-label">📅 Días y Horarios</div>
+        <div class="modal-info-value" id="modalDias">-</div>
+      </div>
+
+      <div class="modal-info-item">
+        <div class="modal-info-label">💰 Precio Mensual</div>
+        <div class="modal-info-value" id="modalPrecio">-</div>
+      </div>
+
+      <a href="#registro" class="btn-primary" style="display: block; text-align: center; margin-top: 1.5rem;" onclick="closeModal()">Registrarme en este Plan</a>
+    </div>
+  </div>
+
+  <!-- SECCIÓN: REGISTRO DE JUGADOR -->
+  <section id="registro">
+    <h2 class="section-title">REGISTRO DE <span>JUGADOR</span></h2>
+    <p class="section-subtitle">Completa los campos a continuación para procesar tu registro</p>
+
+    <div class="form-wrapper">
+      <form id="registroForm">
+        
+        <div class="form-group">
+          <label for="nombre">Nombre Completo *</label>
+          <input type="text" id="nombre" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+          <label for="edad">Edad *</label>
+          <input type="number" id="edad" class="form-control" min="5" max="60" placeholder="Ej: 16" required>
+        </div>
+
+        <div class="form-group">
+          <label for="club">¿Estás en algún club actualmente? *</label>
+          <select id="club" class="form-control" required>
+            <option value="" disabled selected>Selecciona una opción</option>
+            <option value="Sí">Sí</option>
+            <option value="No">No
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="telefono">Número de Teléfono (WhatsApp) *</label>
+          <input type="tel" id="telefono" class="form-control" placeholder="Ej: 11 1234 5678" required>
+        </div>
+
+        <div class="form-group">
+          <label for="metodoPago">Método de Pago Preferido *</label>
+          <select id="metodoPago" class="form-control" required>
+            <option value="" disabled selected>Selecciona cómo prefieres abonar</option>
+            <option value="Transferencia Bancaria">Transferencia Bancaria</option>
+            <option value="Efectivo">Efectivo</option>
+          </select>
+        </div>
+
+        <button type="submit" id="btnSubmit" class="btn-submit">Confirmar Registro</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <img src="logo.jpg" alt="OBERCAMP Logo" class="footer-logo">
+        <p class="footer-desc">Centro de Entrenamiento de Fútbol de Alto Rendimiento.</p><br>
+        <p>📍 <strong>Dirección:</strong> Centenera 845, Villa Luzuriaga</p>
+        <div class="footer-map">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3281.085444747754!2d-58.5832109!3d-34.6778153!2m3!1f0!f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc6383a8115eb%3A0x868b418a002bc345!2sCentenera%20845%2C%20B1754%20Villa%20Luzuriaga%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1700000000000!5m2!1ses!2sar" 
+      width="100%" 
+      height="140" 
+      style="border:0;" 
+      allowfullscreen="" 
+      loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#nosotros">Conoce Obercamp</a></li>
+          <li><a href="#planes">Nuestros Planes</a></li>
+          <li><a href="#registro">Registro de Jugador</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <p>💬 <strong>WhatsApp:</strong> <a href="https://wa.me/5491172413871" target="_blank" style="color: inherit; text-decoration: none;">11 7241 3871</a></p>
+        <p><strong>Instagram:</strong> <a href="https://instagram.com/obercamp" target="_blank" class="footer-link-instagram"> @obercamp</a></p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 OBERCAMP. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+<script>
+    // --- DATOS DE CADA PLAN ---
+    const datosPlanes = {
+      inferiores: {
+        titulo: "Plan Inferiores",
+        dias: "Lunes y Miércoles - 17:00 hs a 19:00 hs",
+        precio: "$39.999"
+      },
+      libre: {
+        titulo: "Plan Libre",
+        dias: "Martes y Jueves - 18:00 hs a 20:00 hs",
+        precio: "$39.999"
+      }
+    };
+
+    // --- LÓGICA DEL MODAL DINÁMICO DE PLANES ---
+    function openModal(planKey) {
+      const modal = document.getElementById('planModal');
+      const info = datosPlanes[planKey];
+
+      if (info) {
+        document.getElementById('modalPlanTitle').innerText = info.titulo;
+        document.getElementById('modalDias').innerText = info.dias;
+        document.getElementById('modalPrecio').innerText = info.precio;
+        modal.style.display = 'flex';
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('planModal').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById('planModal');
+      if (event.target === modal) {
+        closeModal();
+      }
+    };
+//REGISTRO
+    document.getElementById('registroForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const form = this;
+  const submitBtn = form.querySelector('button[type="submit"]');
+  submitBtn.innerText = 'Enviando...';
+  submitBtn.disabled = true;
+
+  const endpointFormspree = "https://formspree.io/f/xyekedvz"; // Tu URL de Formspree
+
+  const datosEnvio = {
+    Nombre: document.getElementById('nombre').value,
+    Edad: document.getElementById('edad').value,
+    ClubActual: document.getElementById('club').value,
+    WhatsApp: document.getElementById('telefono').value,
+    MetodoDePago: document.getElementById('metodoPago').value
+  };
+
+  fetch(endpointFormspree, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify(datosEnvio)
+  })
+  .then(response => {
+    if (response.ok) {
+      alert('¡Registro enviado con éxito! Nos pondremos en contacto a la brevedad.');
+      form.reset();
+    } else {
+      alert('Ocurrió un error al enviar el formulario.');
+    }
+  })
+  .catch(error => {
+    console.error(error);
+    alert('Error de red al intentar procesar el registro.');
+  })
+  .finally(() => {
+    submitBtn.innerText = 'Confirmar Registro';
+    submitBtn.disabled = false;
+  });
+});
+  </script>
+</body>
+</html>
